@@ -1,7 +1,7 @@
 Particle[] someParticle;
 void setup()
 	{
-size(400,400);
+size(800,800);
 someParticle = new Particle[100];
 for (int i = 0; i < someParticle.length; i++) 
 		{ 
@@ -9,10 +9,12 @@ for (int i = 0; i < someParticle.length; i++)
 		
 		}
 		someParticle[0] = new OddballParticle();
+				someParticle[1] = new JumboParticle();
+
 	}
 
 void draw()
-{
+{	background(76, 232, 99);
 	for(int i = 0; i < someParticle.length; i++)
 	{	
 		someParticle[i].show();
@@ -26,25 +28,33 @@ double nSpeed, nAngle;
 double nX;
 double nY;
 int nColor;
+int speedDirection;
 
 public void show() 
 {
 noStroke();
 fill((int)(Math.random()*230),(int)(Math.random()*230),(int)(Math.random()*230));
-ellipse((float)nX,(float)nY,5,5);
+ellipse((float)nX,(float)nY,10,10);
 }
 
 public void move() 
 {
-	nX = nX + 8*Math.cos(nAngle);
-	nY = nY + 8*Math.sin(nAngle);
+	nX = nX + 2*nSpeed*Math.cos(nAngle);
+	nY = nY + 2*nSpeed*Math.sin(nAngle);
+	if (nSpeed>29 || nSpeed <-29) {
+		speedDirection *= -1;
+	}
+
+	nSpeed+= 2*(speedDirection);
 }
 
 NormalParticle() 
 {
 nAngle = Math.random()*2*Math.PI;
-nX = 200;
-nY = 200;
+nX = 400;
+nY = 400;
+nSpeed=30;
+speedDirection = 1;
 }
 
 }
@@ -65,21 +75,24 @@ nY = 200;
 	int oColor;
 
 	public void show() {
-		fill(oColor);
-		rect((float)oX,(float)oY,10,10);
+		fill(19, 219, 209);
+		ellipse((float)oX,(float)oY-20,45,45);
+		fill(188, 209, 208);
+		ellipse((float)oX,(float)oY,100,30);
+		
+
 	}	
 
 	public void move() {
-		oX = oX + oSpeed;
-		
-		oSpeed -=5;
+		oX = oX + (int)(Math.random()*10-5);
+		oY=oY+ (int)(Math.random()*10-5);
 
 	}
 
 	OddballParticle() {
 		oSpeed = 2;
-		oX = 200;
-		oY = 200;
+		oX = 400;
+		oY = 400;
 		oColor = color(0,0,0);
 	}
 
@@ -87,11 +100,15 @@ nY = 200;
 
 
 
-/* class JumboParticle implements Particle
+ class JumboParticle extends NormalParticle
 {
-	//your code here
 
+
+public void show() 
+{
+noStroke();
+fill((int)(Math.random()*230),(int)(Math.random()*230),(int)(Math.random()*230));
+ellipse((float)nX,(float)nY,50,50);
 }
 
-
-*/
+}
