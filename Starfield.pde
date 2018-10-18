@@ -24,7 +24,7 @@ void draw()
 }
 class NormalParticle implements Particle 
 {
-double nSpeed, nAngle;
+double nSpeed, nAngle,initialSpeed;
 double nX;
 double nY;
 int nColor;
@@ -39,8 +39,8 @@ ellipse((float)nX,(float)nY,10,10);
 
 public void move() 
 {
-	nX = nX + 2*nSpeed*Math.cos(nAngle);
-	nY = nY + 2*nSpeed*Math.sin(nAngle);
+	nX = nX + initialSpeed + 2*nSpeed*Math.cos(nAngle);
+	nY = nY + initialSpeed + 2*nSpeed*Math.sin(nAngle);
 	if (nSpeed>29 || nSpeed <-29) {
 		speedDirection *= -1;
 	}
@@ -54,6 +54,7 @@ nAngle = Math.random()*2*Math.PI;
 nX = 400;
 nY = 400;
 nSpeed=30;
+initialSpeed = (Math.random()*4)-2;
 speedDirection = 1;
 }
 
