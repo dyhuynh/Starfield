@@ -1,6 +1,7 @@
 Particle[] someParticle;
 void setup()
 	{
+
 size(800,800);
 someParticle = new Particle[100];
 for (int i = 0; i < someParticle.length; i++) 
@@ -51,8 +52,8 @@ public void move()
 NormalParticle() 
 {
 nAngle = Math.random()*2*Math.PI;
-nX = 400;
-nY = 400;
+nX = mouseX;
+nY = mouseY;
 nSpeed=30;
 initialSpeed = (Math.random()*4)-2;
 speedDirection = 1;
@@ -111,5 +112,16 @@ noStroke();
 fill((int)(Math.random()*230),(int)(Math.random()*230),(int)(Math.random()*230));
 ellipse((float)nX,(float)nY,50,50);
 }
+
+}
+
+void mousePressed() {
+for (int i = 0; i < someParticle.length; i++) 
+		{ 
+			someParticle[i] = new NormalParticle();
+		
+		}
+		someParticle[0] = new OddballParticle();
+				someParticle[1] = new JumboParticle();
 
 }
